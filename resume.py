@@ -12,7 +12,7 @@ class Resume:
 
     def __init__(self):  #name, email, mobile, linkedin, ssc_place, ssc_adr, ssc_year, ssc_result, ssc_degree, e2_place, e2_adr, field, e2_year, e2_result, e3_place, e3_adr, field1, branch, e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title, proj1_desc, proj2_title, proj2_desc, certificates):
         #Register fonts
-        pdfmetrics.registerFont(TTFont('Arial', 'Arial.ttf'))
+        pdfmetrics.registerFont(TTFont('Arial', './font/Arial.ttf'))
         pdfmetrics.registerFont(TTFont('Roboto-Medium', 'Roboto-Medium.ttf'))
 
         self.x = 20
