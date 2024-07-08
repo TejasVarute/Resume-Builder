@@ -85,21 +85,9 @@ class strealit_web_gui:
 
 
 def data():
-        def pdf():
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_font("Arial", size=12)
-            pdf.cell(200, 10, txt="Welcome to Streamlit PDF creation!", ln=True, align='C')
-            pdf.cell(200, 10, txt="This PDF is created in memory.", ln=True, align='C')
-
-            return pdf
-
-        pdf = pdf()
-        st.button('process')
-        #pdf = Resume().get_pdf()
+        pdf = Resume().get_pdf()
         buffer = io.BytesIO()
-        pdf.output(buffer)
-        #pdf.save()
+        pdf.save(buffer)
         buffer.seek(0)
         st.download_button(label="Resume Download", data=buffer, file_name="Resume.pdf", mime="application/pdf")
 data()
