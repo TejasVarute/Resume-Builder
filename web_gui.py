@@ -1,5 +1,6 @@
 import streamlit as st
-from fpdf import FPDF
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 import io
 
 from resume import Resume
@@ -70,24 +71,7 @@ class strealit_web_gui:
                     k, v = cert.split(':')
                     certificates[k] = v
 
-        try:
-            st.button('process')
-            pdf = Resume().get_pdf()    #name, email, mobile, linkedin, ssc_place, ssc_adr, ssc_year, ssc_result, ssc_degree, e2_place, e2_adr, field, e2_year, e2_result, e3_place, e3_adr, field1, branch, e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title, proj1_desc, proj2_title, proj2_desc, certificates).get_pdf()
-            buffer = io.BytesIO()
-            pdf.save(buffer)
-            buffer.seek(0)
-
-            st.download_button(label="Resume Download", data=buffer, file_name="Resume.pdf", mime="application/pdf")
-        except:
-            pass
-
-#strealit_web_gui().data()
-
-
-def data():
-        pdf = Resume().get_pdf()
-        buffer = io.BytesIO()
-        pdf.save(buffer)
-        buffer.seek(0)
+        buffer = Resume().get_pdf() #name, email, mobile, linkedin, ssc_place, ssc_adr, ssc_year, ssc_result, ssc_degree, e2_place, e2_adr, field, e2_year, e2_result, e3_place, e3_adr, field1, branch, e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title, proj1_desc, proj2_title, proj2_desc, certificates).get_pdf()
         st.download_button(label="Resume Download", data=buffer, file_name="Resume.pdf", mime="application/pdf")
-data()
+
+strealit_web_gui().data()
