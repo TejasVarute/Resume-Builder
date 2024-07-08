@@ -1,3 +1,4 @@
+import io
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
@@ -68,7 +69,8 @@ class Resume:
         paragraph.drawOn(pdf, x, y)
 
     def get_pdf(self):
-        pdf = canvas.Canvas(filename=self.filename)
+        buffer = io.BytesIO()
+        pdf = canvas.Canvas(buffer)
         #pdf.drawBoundary(sb=0, x1=10, y1=10, width=575, height=820)
 
         # Header
@@ -240,8 +242,6 @@ class Resume:
                 pdf.drawString(x, y, self.hobbies[counter])
                 counter+=1
                 x += 200
-        return pdf
-
-#remove
-'''pdf = Resume().get_pdf()
-pdf.save()'''
+        pdf.save()
+        buffer.seek(0)
+        return buffer
