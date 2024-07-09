@@ -8,7 +8,7 @@ from reportlab.platypus import Paragraph
 
 class Resume:
 
-    def __init__(self, name, email, mobile, linkedin, objective,ssc_place, ssc_adr, ssc_year, ssc_result, ssc_degree, e2_place, e2_adr, field, e2_year, e2_result, e3_place, e3_adr, field1, branch, e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title, proj1_desc, proj2_title, proj2_desc, certificates):
+    def __init__(self, name, email, mobile, linkedin, objective,ssc_place, ssc_adr, ssc_year, ssc_result, ssc_degree, e2_place, e2_adr, field, branch_d, e2_year, e2_result, e3_place, e3_adr, field1, branch, e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title, proj1_desc, proj2_title, proj2_desc, certificates):
         #Register fonts
         pdfmetrics.registerFont(TTFont('Arial', './font/Arial.ttf'))
         pdfmetrics.registerFont(TTFont('Roboto-Medium', './font/Roboto-Medium.ttf'))
@@ -36,7 +36,7 @@ class Resume:
 
         self.e2_place = e2_place
         self.e2_adrs = e2_adr
-        self.e2_degree = field
+        self.e2_degree = f'{field} {branch_d}'
         self.e2_year = e2_year
         self.e2_result = e2_result
 
