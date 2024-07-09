@@ -30,7 +30,7 @@ class strealit_web_gui:
         st.subheader("AFTER SSC")
         field = st.selectbox("Your Field after 10th", ["HSC", "DEPLOMA"])
         if field == 'DEPLOMA':
-            branch_d = st.selectbox("Select branch", branches)
+            branch_d = st.selectbox(f"Select your {field} branch", branches)
         else:
             branch_d = ''
         e2_place = st.text_input(f'Your {field} college', placeholder='Enter Your College Name')
@@ -42,7 +42,7 @@ class strealit_web_gui:
         field1 = st.selectbox("Your Field", ["BTech", "BFarmcy"])
         
         if field1 == 'BTech':
-            branch = st.selectbox("Select branch", branches)
+            branch = st.selectbox(f"Select your {field} branch", branches)
         else:
             branch = ''
         e3_place = st.text_input(f'Your {field1} college', placeholder='Enter Your College Name')
