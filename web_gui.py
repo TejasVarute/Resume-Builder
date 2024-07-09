@@ -42,7 +42,7 @@ class strealit_web_gui:
         field1 = st.selectbox("Your Field", ["BTech", "BFarmcy"])
         
         if field1 == 'BTech':
-            branch = st.selectbox(f"Select your {field} branch", branches)
+            branch = st.selectbox(f"Select your {field1} branch", branches)
         else:
             branch = ''
         e3_place = st.text_input(f'Your {field1} college', placeholder='Enter Your College Name')
