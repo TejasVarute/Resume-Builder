@@ -22,21 +22,25 @@ class strealit_web_gui:
         ssc_year = st.text_input('Your SSC Year of Passing')
         ssc_result = st.text_input('Result', placeholder='Enter Your SSC Percentages')
         ssc_degree = "SSC"
+        
+        branches = ["Computer Science Engineering", "Artificial Intelligence and Data Structure", "Electronics and Telecommunication Engineering",
+                    "Electronics and Computer Engineering", "Electrical Engineering", "Automation and Robotics", "Mechatronics Engineering",
+                    "Civil Engineering", "Mechanical Engineering"]
 
         st.subheader("AFTER SSC")
         field = st.selectbox("Your Field after 10th", ["HSC", "DEPLOMA"])
+        if field == 'DEPLOMA':
+            branch_d = st.selectbox("Select branch", branches)
+        else:
+            branch_d = ''
         e2_place = st.text_input(f'Your {field} college', placeholder='Enter Your College Name')
         e2_adr = st.text_input('Your college City', placeholder='Enter Your College City')
         e2_year = st.text_input(f'Your {field} Passing Year')
         e2_result = st.text_input('Result', placeholder=f'Enter Your {field} Percentages')
 
         st.subheader("Under Graduation Course")
-        field1 = st.selectbox("Your Field", ["BTech", "BFarmcy", "DFarmcy"])
-
-        branches = ["Computer Science Engineering", "Artificial Intelligence and Data Structure", "Electronics and Telecommunication Engineering",
-                    "Electronics and Computer Engineering", "Electrical Engineering", "Automation and Robotics", "Mechatronics Engineering",
-                    "Civil Engineering", "Mechanical Engineering"]
-
+        field1 = st.selectbox("Your Field", ["BTech", "BFarmcy"])
+        
         if field1 == 'BTech':
             branch = st.selectbox("Select branch", branches)
         else:
@@ -79,7 +83,7 @@ class strealit_web_gui:
         if submitted:
             try:
                 buffer = Resume(name, email, mobile, linkedin, objective, ssc_place, ssc_adr, ssc_year, ssc_result, ssc_degree,
-                            e2_place, e2_adr, field, e2_year, e2_result, e3_place, e3_adr, field1, branch,
+                            e2_place, e2_adr, field, branch_d, e2_year, e2_result, e3_place, e3_adr, field1, branch,
                             e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title,
                             proj1_desc, proj2_title, proj2_desc, certificates).get_pdf()
                 st.download_button(label="Resume Download", data=buffer, file_name=f"Resume {name}.pdf",mime="application/pdf")
