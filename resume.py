@@ -6,8 +6,6 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Paragraph
 
-#height : 830 415
-#weidth : 550 275
 class Resume:
 
     def __init__(self, name, email, mobile, linkedin, objective,ssc_place, ssc_adr, ssc_year, ssc_result, ssc_degree, e2_place, e2_adr, field, e2_year, e2_result, e3_place, e3_adr, field1, branch, e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title, proj1_desc, proj2_title, proj2_desc, certificates):
@@ -234,18 +232,13 @@ class Resume:
 
         #Hobbies
         pdf.setFont(self.font, 11)
-
-        y = self.y - 20
-        counter = 0
-        for k in range (len(self.hobbies)-1):
-            x = self.x + 15
-            y -= 17
-            for i in range (6):
-                if counter == len(self.hobbies):
-                    break
-                pdf.drawString(x, y, self.hobbies[counter])
-                counter+=1
-                x += 100
+        hobbie = ""
+        for ele in self.hobbies:
+            if ele != self.hobbies[-1]:
+                hobbie = hobbie + f'{ele}, '
+            else:
+                hobbie = hobbie + f'{ele}. '
+        pdf.drawString(self.x + 30, self.y - 40, hobbie)
         pdf.save()
         buffer.seek(0)
         return buffer
