@@ -82,7 +82,7 @@ class strealit_web_gui:
                             e2_place, e2_adr, field, e2_year, e2_result, e3_place, e3_adr, field1, branch,
                             e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title,
                             proj1_desc, proj2_title, proj2_desc, certificates).get_pdf()
-                st.download_button(label="Resume Download", data=buffer, file_name="Resume.pdf",mime="application/pdf")
+                st.download_button(label="Resume Download", data=buffer, file_name=f"Resume {name}.pdf",mime="application/pdf")
             except:
                 st.subheader(":red[Please Insert All information to get Resume]")
 
