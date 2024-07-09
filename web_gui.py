@@ -57,11 +57,11 @@ class strealit_web_gui:
         st.header("PROJECTS")
         st.subheader("Project 1")
         proj1_title = st.text_input('Enter Title of Project 1)', placeholder='Enter Project 1 Title')
-        proj1_desc = st.text_input('Enter Description of Project 1 (4-5 lines))', placeholder='Enter Project 1 Description')
+        proj1_desc = st.text_input('Enter Description of Project 1 (3-5 lines))', placeholder='Enter Project 1 Description')
 
         st.subheader("Project 2")
         proj2_title = st.text_input('Enter Title of Project 2)', placeholder='Enter Project 2 Title')
-        proj2_desc = st.text_input('Enter Description of Project 2 (4-5 lines))', placeholder='Enter Project 2 Description')
+        proj2_desc = st.text_input('Enter Description of Project 2 (3-5 lines))', placeholder='Enter Project 2 Description')
 
         st.header("CERTIFICATIONS")
         cert_count = st.text_input('How many Certificates you have (Max 8)', placeholder="How many certificates you have")
