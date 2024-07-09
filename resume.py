@@ -10,7 +10,7 @@ from reportlab.platypus import Paragraph
 #weidth : 550 275
 class Resume:
 
-    def __init__(self):  #name, email, mobile, linkedin, ssc_place, ssc_adr, ssc_year, ssc_result, ssc_degree, e2_place, e2_adr, field, e2_year, e2_result, e3_place, e3_adr, field1, branch, e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title, proj1_desc, proj2_title, proj2_desc, certificates):
+    def __init__(self, name, email, mobile, linkedin, objective,ssc_place, ssc_adr, ssc_year, ssc_result, ssc_degree, e2_place, e2_adr, field, e2_year, e2_result, e3_place, e3_adr, field1, branch, e3_year, e3_result, tech_skills, soft_skills, lang, tools, hobbie, proj1_title, proj1_desc, proj2_title, proj2_desc, certificates):
         #Register fonts
         pdfmetrics.registerFont(TTFont('Arial', './font/Arial.ttf'))
         pdfmetrics.registerFont(TTFont('Roboto-Medium', './font/Roboto-Medium.ttf'))
@@ -23,49 +23,50 @@ class Resume:
         self.font1 = 'Roboto-Medium'
 
         #Header Info
-        self.name = "Tejas Varute"
-        self.email = "tvarute@gmail.com"
-        self.linkedin = "https://www.linkedin.com/in/tejasvarute"
-        self.mobile = "7249025371"
+        self.name = name
+        self.email = email
+        self.linkedin = linkedin
+        self.mobile = mobile
+        self.objective = objective
 
         #Education Info
-        self.e1_place = "Janata Secondary School"
-        self.e1_adrs = "Hupari"
-        self.e1_degree = "SSC"
-        self.e1_year = "2019"
-        self.e1_result = "79.60"
+        self.e1_place = ssc_place
+        self.e1_adrs = ssc_adr
+        self.e1_degree = ssc_degree
+        self.e1_year = ssc_year
+        self.e1_result = ssc_result
 
-        self.e2_place = "Parisanna Ingrole Jr. College"
-        self.e2_adrs = "Hupari"
-        self.e2_degree = "HSC"
-        self.e2_year = "2021"
-        self.e2_result = "75.17"
+        self.e2_place = e2_place
+        self.e2_adrs = e2_adr
+        self.e2_degree = field
+        self.e2_year = e2_year
+        self.e2_result = e2_result
 
-        self.e3_place = "Sharad Institute of Technology"
-        self.e3_adrs = "Yadrav, Ichalkaranji"
-        self.e3_degree = "BTech - Electronics and Computer Engineering"
-        self.e3_year = "2025"
-        self.e3_result = "8.33"
+        self.e3_place = e3_place
+        self.e3_adrs = e3_adr
+        self.e3_degree = f'{field1} {branch}'
+        self.e3_year = e3_year
+        self.e3_result = e3_result
 
-        self.skills = ['C', 'C++', 'SQL', 'Java', 'Python', 'Oracle']
-        self.soft_skills = ['Leadership', 'Quick learner', 'Self Learning']
-        self.lang = ['English', 'Hindi', 'Marathi']
-        self.tools = ['MS-Word', 'MS-Excel', 'MS-PowerPoint', 'VS-Code']
-        self.hobbies = ['Drawing', 'Playing video games', 'Listening music', 'Coding in python']
+        self.skills = tech_skills.split(",")
+        self.soft_skills = soft_skills.split(",")
+        self.lang = lang.split(",")
+        self.tools = tools.split(",")
+        self.hobbies = hobbie.split(",")
 
-        self.project1_title = "Elective"
-        self.project1_description = "This system automates the subject selection process, ensuring a fair and transparent allocation of elective subjects, while also providing a user-friendly interface for faculties and administrators."
+        self.project1_title = proj1_title
+        self.project1_description = proj1_desc
 
-        self.project2_title = "Attendance"
-        self.project2_description = "Attendance tracking is a crucial aspect of educational institutions, yet the traditional manual methods are time-consuming and error-prone. This project aims to streamline the attendance tracking process in schools and colleges considering different approach."
+        self.project2_title = proj2_title
+        self.project2_description = proj2_desc
 
-        self.certi = {'AWS':"amazon", 'Python':"GUVI", 'DATA ANALYTICS':"CISCO,IBM", 'DATA SCINCE':"Bharat Intern"}
+        self.certi = certificates
 
     def draw_paragraph(self, pdf, text, x, y):
         styles = getSampleStyleSheet()
         style = styles["Normal"]
         paragraph = Paragraph(text, style)
-        paragraph.wrapOn(pdf, 550, 5)
+        paragraph.wrapOn(pdf, 540, 5)
         paragraph.drawOn(pdf, x, y)
 
     def get_pdf(self):
@@ -86,7 +87,10 @@ class Resume:
         pdf.setFillColor(colors.black)
         pdf.drawString((self.x + 400), (self.y - 30), "Mobile : ")
         pdf.drawString((self.x + 445), (self.y - 30), self.mobile)
+        pdf.drawString((self.x + 10), (self.y - 70), "Objective : ")
+        self.draw_paragraph(pdf, self.objective, self.x + 20, self.y - 110)
 
+        self.y = self.y-60
         # Separator
         pdf.line(10, (self.y - 60), 585, (self.y - 60))
 
@@ -184,42 +188,42 @@ class Resume:
 
         #Project 1
         pdf.setFont(self.font1, 11)
-        pdf.drawString((self.x + 10), (self.y - 360), self.project1_title)
+        pdf.drawString((self.x + 10), (self.y - 365), self.project1_title)
 
         pdf.setFont(self.font, 10)
-        if len(self.project1_description) > 250:
-            self.draw_paragraph(pdf, self.project1_description, self.x + 10, self.y - 420)
+        if len(self.project1_description) > 350:
+            self.draw_paragraph(pdf, self.project1_description, self.x + 20, self.y - 430)
         else:
-            self.draw_paragraph(pdf, self.project1_description, self.x + 10, self.y - 400)
+            self.draw_paragraph(pdf, self.project1_description, self.x + 20, self.y - 410)
 
         # Project 2
         pdf.setFont(self.font1, 11)
-        pdf.drawString((self.x + 10), (self.y - 460), self.project2_title)
+        pdf.drawString((self.x + 10), (self.y - 455), self.project2_title)
 
         pdf.setFont(self.font, 10)
-        if len(self.project2_description) > 250:
-            self.draw_paragraph(pdf, self.project2_description, self.x + 10, self.y - 510)
+        if len(self.project2_description) > 350:
+            self.draw_paragraph(pdf, self.project2_description, self.x + 20, self.y - 520)
         else:
-            self.draw_paragraph(pdf, self.project2_description, self.x + 10, self.y - 490)
+            self.draw_paragraph(pdf, self.project2_description, self.x + 20, self.y - 500)
 
         # Separator
-        pdf.line(10, (self.y - 540), 585, (self.y - 540))
+        pdf.line(10, (self.y - 530), 585, (self.y - 530))
 
         pdf.setFont(self.font1, 14)
-        pdf.drawCentredString(300, (self.y - 560), "CERTIFICATIONS")
+        pdf.drawCentredString(300, (self.y - 550), "CERTIFICATIONS")
 
         pdf.setFont(self.font, 11)
         x1 = self.x + 80
         x2 = self.x + 330
-        y1 = self.y - 590
-        y2 = self.y - 590
+        y1 = self.y - 565
+        y2 = self.y - 565
 
         for k,v in self.certi.items():
             pdf.drawString(x1, y1, k)
-            pdf.drawString(x1 + 120, y1, " : ")
+            pdf.drawString(x1 + 170, y1, " : ")
             pdf.drawString(x2, y2, v)
-            y1 -= 20
-            y2 -= 20
+            y1 -= 15
+            y2 -= 15
 
         self.y = y2
         # Separator
@@ -231,17 +235,17 @@ class Resume:
         #Hobbies
         pdf.setFont(self.font, 11)
 
-        y = self.y - 30
+        y = self.y - 20
         counter = 0
         for k in range (len(self.hobbies)-1):
-            x = self.x + 30
-            y -= 20
-            for i in range (3):
+            x = self.x + 15
+            y -= 17
+            for i in range (6):
                 if counter == len(self.hobbies):
                     break
                 pdf.drawString(x, y, self.hobbies[counter])
                 counter+=1
-                x += 200
+                x += 100
         pdf.save()
         buffer.seek(0)
         return buffer
