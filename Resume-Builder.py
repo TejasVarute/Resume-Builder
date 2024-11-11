@@ -7,6 +7,15 @@ class strealit_web_gui:
     def data(self):
         heading = """<h1 align="center">ATS FRIENDLY RESUME BUILDER</h1><br><br>"""
         st.html(heading)
+        
+        hide_style = """
+                    <style>
+                    #MainMenu {visibility : hidden;}
+                    header {visibility : hidden;}
+                    footer {visibility : hidden;}
+                    </style>
+                    """
+        st.markdown(hide_style, unsafe_allow_html=True)
 
         st.header("PERSONAL INFORMATION")
         name = st.text_input('Your Name', placeholder='Enter Your Name')
